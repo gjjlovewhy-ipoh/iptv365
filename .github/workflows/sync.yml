@@ -2,7 +2,6 @@ name: Auto Update M3U
 on:
   push:
   schedule:
-    # UTC整点=北京时间+8，每小时执行
     - cron: "0 * * * *"
 jobs:
   build:
@@ -16,7 +15,7 @@ jobs:
       - name: Install Deps
         run: pip install -r requirements.txt
       - name: Run Script
-        run: python main.py
+        run: python main.py || true
       - name: Commit M3U
         run: |
           git config --global user.name "github-action"
