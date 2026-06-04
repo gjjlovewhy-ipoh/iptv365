@@ -12,11 +12,9 @@ OUT_PATH = cfg["out_file"]
 UNIQUE = cfg["enable_unique"]
 GROUP_RULE = cfg["group_rule"]
 
-# 存储 {url:频道名}
 channel_dict = {}
 
 def get_group_by_name(name: str) -> str:
-    """根据频道名称匹配分类"""
     name = name.upper()
     for group_name, keywords in GROUP_RULE.items():
         for kw in keywords:
@@ -27,11 +25,12 @@ def get_group_by_name(name: str) -> str:
 def fetch_one_source(url: str):
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
     try:
-        resp = requests.get(url, timeout=15, headers=headers)
+        resp = requests.get(url, timeout=10, headers=headers)
+        resp.raise_for_status()
         resp.encoding = resp.apparent_encoding
         text = resp.text.strip()
     except Exception as e:
-        print(f"【抓取失败】{url} -> {str(e)}")
+        print(f"【跳过失效源】{url} | 错误:{str(e)}")
         return
 
     lines = text.splitlines()
@@ -46,45 +45,46 @@ def fetch_one_source(url: str):
             continue
         if line.startswith("#"):
             continue
-        # m3u播放地址
         if line.startswith("http"):
             ch_name = tmp_name if tmp_name else f"未知_{len(channel_dict)}"
             channel_dict[line] = ch_name
             tmp_name = ""
-        # txt格式 名称,url
-        elif "," in line and line.split(",")[-1].startswith("http"):
-            ch_name, ch_url = line.rsplit(",", 1)
-            channel_dict[ch_url.strip()] = ch_name.strip()
+        elif "," in line and line.rsplit(",",1)[-1].startswith("http"):
+            try:
+                ch_name, ch_url = line.rsplit(",", 1)
+                channel_dict[ch_url.strip()] = ch_name.strip()
+            except:
+                continue
 
 def build_m3u():
     channel_dict.clear()
-    # 全线路抓取
     for src in SOURCE_LIST:
         fetch_one_source(src)
 
-    # 组装m3u内容
     m3u = ["#EXTM3U"]
     for url, name in channel_dict.items():
         group = get_group_by_name(name)
         m3u.append(f'#EXTINF:-1 group-title="{group}",{name}')
         m3u.append(url)
 
-    # 写入文件
     with open(OUT_PATH, "w", encoding="utf-8") as f:
         f.write("\n".join(m3u))
-    print(f"✅ 生成完成，总频道：{len(channel_dict)}，文件：{OUT_PATH}")
+    print(f"✅ 生成完成，总频道：{len(channel_dict)}")
 
-def start_scheduler():
-    scheduler = BackgroundScheduler()
-    scheduler.add_job(build_m3u, "interval", hours=cfg["cron_hour"])
-    scheduler.start()
-    print("⏰ 定时任务启动：每1小时自动更新M3U")
-    build_m3u()
-    try:
-        while True:
-            input()
-    except KeyboardInterrupt:
-        scheduler.shutdown()
-
+# Action云端只执行一次生成，不启用后台定时阻塞
 if __name__ == "__main__":
-    start_scheduler()
+    import sys
+    # 判断环境：Github Action直接生成退出，本地运行开启定时
+    if "CI" in os.environ:
+        build_m3u()
+    else:
+        scheduler = BackgroundScheduler()
+        scheduler.add_job(build_m3u, "interval", hours=cfg["cron_hour"])
+        scheduler.start()
+        build_m3u()
+        print("⏰本地定时启动，每小时更新")
+        try:
+            while True:
+                input()
+        except KeyboardInterrupt:
+            scheduler.shutdown()
