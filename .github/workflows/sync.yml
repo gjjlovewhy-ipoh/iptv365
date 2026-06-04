@@ -1,0 +1,26 @@
+name: Auto Update M3U
+on:
+  push:
+  schedule:
+    # UTC整点=北京时间+8，每小时执行
+    - cron: "0 * * * *"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install Deps
+        run: pip install -r requirements.txt
+      - name: Run Script
+        run: python main.py
+      - name: Commit M3U
+        run: |
+          git config --global user.name "github-action"
+          git config --global user.email "action@github.com"
+          git add tv.m3u
+          git diff --quiet && git diff --staged --quiet || git commit -m "Auto update tv.m3u $(date)"
+          git push
