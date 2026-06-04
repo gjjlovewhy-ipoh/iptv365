@@ -1,6 +1,6 @@
 # 定时周期：1小时抓取一次
 cron_hour: 1
-# 全部源地址（你给的所有线路）
+# 全部源地址
 source_urls:
   - "https://gh-proxy.org/https://raw.githubusercontent.com/YanG-1989/m3u/main/Gather.m3u"
   - "https://gh-proxy.org/https://raw.githubusercontent.com/zwc456baby/iptv_alive/master/live.txt"
@@ -39,7 +39,7 @@ source_urls:
   - "https://live.freetv.top/huyayqk.m3u"
   - "https://live.freetv.top/douyuyqk.m3u"
   - "https://www.goodiptv.club/bililive.m3u"
-  - "https://jazzforlove.github.io/IPTV/IPTV_****3u"
+  - "https://jazzforlove.github.io/IPTV/IPTV_CN.m3u"
   - "https://live.kakaxi-1.ink/iptv.txt"
   - "https://myernestlu.github.io/zby.txt"
 
@@ -48,7 +48,7 @@ out_file: "tv.m3u"
 # 开启URL去重
 enable_unique: true
 
-# 频道分类规则【可自行增删关键词】
+# 频道分类规则
 group_rule:
   央视频道: ["CCTV","央视","中央一台","中央二台","中央三台","中央四台","中央五台","中央六台","中央七台","中央八台","中央九台","中央十台","中央十一台","中央十二台","中央十三台","中央十四台","中央十五台"]
   新闻频道: ["新闻","资讯","环球新闻","财经新闻","纪实"]
