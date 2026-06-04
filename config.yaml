@@ -1,0 +1,60 @@
+# 定时周期：1小时抓取一次
+cron_hour: 1
+# 全部源地址（你给的所有线路）
+source_urls:
+  - "https://gh-proxy.org/https://raw.githubusercontent.com/YanG-1989/m3u/main/Gather.m3u"
+  - "https://gh-proxy.org/https://raw.githubusercontent.com/zwc456baby/iptv_alive/master/live.txt"
+  - "https://gh-proxy.org/https://raw.githubusercontent.com/MercuryZz/IPTVN/refs/heads/Files/IPTV.m3u"
+  - "http://175.178.251.183:6689/live.m3u"
+  - "https://gh-proxy.org/https://raw.githubusercontent.com/yuanzl77/IPTV/main/live.m3u"
+  - "https://gh-proxy.org/https://raw.githubusercontent.com/balala2oo8/iptv/main/o.m3u"
+  - "https://gh-proxy.org/https://raw.githubusercontent.com/lalifeier/IPTV/main/m3u/IPTV.m3u"
+  - "https://gh-proxy.org/https://raw.githubusercontent.com/skddyj/iptv/main/IPTV.m3u"
+  - "https://gh-proxy.org/https://raw.githubusercontent.com/mlzlzj/hnyuan/refs/heads/main/iptv_list.txt"
+  - "https://gh-proxy.org/https://raw.githubusercontent.com/alienlu/iptv/master/iptv.m3u"
+  - "https://gh-proxy.org/https://raw.githubusercontent.com/fenxp/iptv/refs/heads/main/live/tvlive.txt"
+  - "https://gh-proxy.org/https://raw.githubusercontent.com/Rivens7/Livelist/main/IPTV.m3u"
+  - "https://gh-proxy.org/https://raw.githubusercontent.com/Guovin/TV/gd/output/result.m3u"
+  - "https://gh-proxy.org/https://raw.githubusercontent.com/qwerttvv/Beijing-IPTV/master/IPTV-Unicom.m3u"
+  - "https://gh-proxy.org/https://raw.githubusercontent.com/drangjchen/IPTV/refs/heads/main/M3U/Global.m3u"
+  - "https://gh-proxy.org/https://raw.githubusercontent.com/iceyheart/IPTV/main/iptv.m3u"
+  - "https://gh-proxy.org/https://raw.githubusercontent.com/Ftindy/IPTV-URL/main/IPTV.m3u"
+  - "https://gh-proxy.org/https://raw.githubusercontent.com/joevess/IPTV/main/iptv.m3u8"
+  - "https://gh-proxy.org/https://raw.githubusercontent.com/wwb521/live/refs/heads/main/tv.m3u"
+  - "https://gh-proxy.org/https://raw.githubusercontent.com/cairong/iptv-yuan/main/jsyd.m3u"
+  - "https://gh-proxy.org/https://raw.githubusercontent.com/jisoypub/iptv/master/cn_all.m3u"
+  - "https://gh-proxy.org/https://raw.githubusercontent.com/Kimentanm/aptv/master/m3u/iptv.m3u"
+  - "https://gh-proxy.org/https://raw.githubusercontent.com/zbefine/iptv/main/iptv.m3u"
+  - "https://gh-proxy.org/https://raw.githubusercontent.com/vamoschuck/TV/main/M3U"
+  - "https://gh-proxy.org/https://raw.githubusercontent.com/BigBigGrandG/IPTV-URL/release/Gather.m3u"
+  - "https://gh-proxy.org/https://raw.githubusercontent.com/cai23511/yex/master/TVlist/20210808384.m3u"
+  - "https://gist.githubusercontent.com/inkss/0cf33e9f52fbb1f91bc5eb0144e504cf/raw/ipv4.m3u"
+  - "https://iptv-org.github.io/iptv/index.m3u"
+  - "https://sub.ottiptv.cc/huyayqk.m3u"
+  - "https://sub.ottiptv.cc/douyuyqk.m3u"
+  - "https://sub.ottiptv.cc/bililive.m3u"
+  - "https://sub.ottiptv.cc/yylunbo.m3u"
+  - "https://live.zbds.top/tv/iptv4.m3u"
+  - "https://live.iptv365.org/live.m3u"
+  - "https://live.freetv.top/huyayqk.m3u"
+  - "https://live.freetv.top/douyuyqk.m3u"
+  - "https://www.goodiptv.club/bililive.m3u"
+  - "https://jazzforlove.github.io/IPTV/IPTV_****3u"
+  - "https://live.kakaxi-1.ink/iptv.txt"
+  - "https://myernestlu.github.io/zby.txt"
+
+# 输出文件
+out_file: "tv.m3u"
+# 开启URL去重
+enable_unique: true
+
+# 频道分类规则【可自行增删关键词】
+group_rule:
+  央视频道: ["CCTV","央视","中央一台","中央二台","中央三台","中央四台","中央五台","中央六台","中央七台","中央八台","中央九台","中央十台","中央十一台","中央十二台","中央十三台","中央十四台","中央十五台"]
+  新闻频道: ["新闻","资讯","环球新闻","财经新闻","纪实"]
+  体育频道: ["体育","CBA","NBA","足球","网球","乒羽","赛车"]
+  电影频道: ["电影","院线","影视","大片","剧场","CHC"]
+  音乐频道: ["音乐","歌曲","MTV","天籁","金曲"]
+  地方频道: ["北京","上海","广东","广州","深圳","湖南","浙江","江苏","山东","四川","重庆","河南","河北","福建","安徽","卫视","都市","地方"]
+  国外频道: ["韩国","日本","香港","澳门","台湾","TVB","HBO","Fox","BBC","NHK","AXN","欧美","外语"]
+  其他频道: []
